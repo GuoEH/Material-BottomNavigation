@@ -14,6 +14,8 @@
         <!-- default badge color -->
         <attr name="bbn_badgeColor" format="color" />
 
+        <attr name="bbn_shifting" format="boolean" />
+
         <!-- animation duration for the menu items -->
         <attr name="bbn_itemAnimationDuration" format="integer" />
 

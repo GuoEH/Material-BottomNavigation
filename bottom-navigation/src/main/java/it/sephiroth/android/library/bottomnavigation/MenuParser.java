@@ -55,8 +55,9 @@ class MenuParser {
         }
 
         public int getBackground() {
+            boolean isShifting = this.isShifting();
             if (0 == background) {
-                if (shifting && !tablet) {
+                if (isShifting && !tablet) {
                     return MiscUtils.getColor(context, R.attr.colorPrimary);
                 } else {
                     return MiscUtils.getColor(context, android.R.attr.windowBackground);
@@ -66,8 +67,9 @@ class MenuParser {
         }
 
         public int getColorActive() {
+            boolean isShifting = this.isShifting();
             if (0 == colorActive) {
-                if (shifting && !tablet) {
+                if (isShifting && !tablet) {
                     colorActive = MiscUtils.getColor(context, android.R.attr.colorForegroundInverse);
                 } else {
                     colorActive = MiscUtils.getColor(context, android.R.attr.colorForeground);
@@ -77,8 +79,9 @@ class MenuParser {
         }
 
         public int getColorInactive() {
+            boolean isShifting = this.isShifting();
             if (0 == colorInactive) {
-                if (shifting && !tablet) {
+                if (isShifting && !tablet) {
                     int color = getColorActive();
                     colorInactive = Color.argb(Color.alpha(color) / 2, Color.red(color), Color.green(color), Color.blue(color));
                 } else {
@@ -90,8 +93,9 @@ class MenuParser {
         }
 
         public int getRippleColor() {
+            boolean isShifting = this.isShifting();
             if (0 == rippleColor) {
-                if (shifting && !tablet) {
+                if (isShifting && !tablet) {
                     rippleColor = ContextCompat.getColor(context, R.color.bbn_shifting_item_ripple_color);
                 } else {
                     rippleColor = ContextCompat.getColor(context, R.color.bbn_fixed_item_ripple_color);
@@ -102,8 +106,9 @@ class MenuParser {
 
         public void setItems(final BottomNavigationItem[] items) {
             this.items = items;
-            this.shifting = null != items && items.length > 3;
+//            this.shifting = null != items && items.length > 3;
         }
+
 
         public boolean isShifting() {
             return shifting;
@@ -188,6 +193,7 @@ class MenuParser {
         menu.colorInactive = a.getColor(R.styleable.BottomNavigationMenu_bbn_itemColorInactive, 0);
         menu.colorActive = a.getColor(R.styleable.BottomNavigationMenu_bbn_itemColorActive, 0);
         menu.badgeColor = a.getColor(R.styleable.BottomNavigationMenu_bbn_badgeColor, Color.RED);
+        menu.shifting = a.getBoolean(R.styleable.BottomNavigationMenu_bbn_shifting, false);
 
         a.recycle();
     }
